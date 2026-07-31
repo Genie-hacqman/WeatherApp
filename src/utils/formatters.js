@@ -25,6 +25,7 @@ const getTimeZoneName = (timezoneOffset) => {
   return `Etc/GMT${sign}${hours}${minuteSuffix}`
 }
 
+
 export const formatCityDate = (timestamp, timezoneOffset) => {
   const timeZone = getTimeZoneName(timezoneOffset)
   return new Intl.DateTimeFormat([], {
