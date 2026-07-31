@@ -1,16 +1,91 @@
-# React + Vite
+# WeatherApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+WeatherApp is a clean, responsive weather dashboard built with React and Vite.
 
-Currently, two official plugins are available:
+It uses OpenWeatherMap to show live weather, forecasts, air quality, and map-based location data. The goal is to make your daily weather check feel polished, intuitive, and easy to use.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🌦️ What this app does
 
-## React Compiler
+- Fetches **live weather data** for cities and coordinates
+- Detects your **current location** for instant local weather
+- Supports search by **city, country, or coordinates**
+- Displays **hourly** and **7-day forecast** information
+- Shows **air quality metrics** and pollutant levels
+- Renders an **interactive map** with location pinning
+- Offers **light and dark themes** with a modern glass-style UI
+- Saves **favorites** and **recent searches** locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tech stack
 
-## Expanding the ESLint configuration
+- React
+- Vite
+- Tailwind CSS
+- Axios
+- Framer Motion
+- Recharts
+- Leaflet + React-Leaflet
+- Lucide icons
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚙️ Setup
+
+1. Install dependencies
+
+```bash
+cd my-web
+npm install
+```
+
+2. Create a `.env` file in the `my-web` folder
+
+```env
+VITE_OPENWEATHER_API_KEY=your_openweather_api_key
+```
+
+3. Start the app
+
+```bash
+npm run dev -- --host 0.0.0.0 --port 5173
+```
+
+4. Open the app in your browser
+
+```text
+http://localhost:5173
+```
+
+## 💡 Notes
+
+- `.env` is ignored by Git, so your API key stays private.
+- Restart the Vite server after updating `.env` so the key is loaded.
+- If the API key is invalid or still activating, the app may fall back to demo content until it connects.
+
+## 📦 Production
+
+Build the app for production:
+
+```bash
+npm run build
+```
+
+Preview the build locally:
+
+```bash
+npm run preview
+```
+
+## 🧩 Tips for use
+
+- Search for cities like `London`, `Paris`, or `New York`
+- Allow location permission for a faster local result
+- Refresh after changing `.env` to ensure the API key is loaded
+
+## ✨ Improvements
+
+This project is a great base for adding:
+
+- weather alerts
+- radar or satellite layers
+- richer search suggestions
+- offline caching
+
+Thanks for using WeatherApp — it’s designed to feel fast, clear, and easy to use.

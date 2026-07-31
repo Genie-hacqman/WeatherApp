@@ -58,7 +58,7 @@ export const useWeatherData = () => {
       }
     } catch (err) {
       console.error(err)
-      setError('The location could not be resolved. Please try another city or country name.')
+      setError('Unable to load live weather right now. Please try again or search for another location.')
       setData(null)
     } finally {
       setLoading(false)
