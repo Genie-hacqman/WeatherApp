@@ -3,9 +3,6 @@ import axios from 'axios'
 const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY || ''
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 const GEO_URL = 'https://api.openweathermap.org/geo/1.0'
-const aiR_QUALITY_URL = 'https://api.openweathermap.org/data/2.5/air_pollution'
-const current_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
-const daily_FORECAST_URL = 'https://api.openweathermap.org/data/2.5/forecast'
 
 const getUnitLabel = (units) => (units === 'imperial' ? '°F' : '°C')
 const getSpeedUnit = (units) => (units === 'imperial' ? 'mph' : 'km/h')
@@ -21,13 +18,13 @@ const convertWindSpeed = (speed, units) => {
 
 const getWeatherIcon = (icon) => `https://openweathermap.org/img/wn/${icon}@2x.png`
 
-const buildFallbackData = (query, units) => {
+const getSampleWeatherData = (query, units) => {
   const isFahrenheit = units === 'imperial'
   const temperature = isFahrenheit ? 75 : 24
 
   return {
     city: query || 'New York',
-    state: 'Demo Mode',
+    state: 'Sample data',
     country: 'Global',
     coordinates: {
       lat: 40.7128,
@@ -274,7 +271,7 @@ const parseCoordinateQuery = (query) => {
 
 export const getWeatherDashboardData = async (query, units = 'metric', locationOverride = null) => {
   if (!API_KEY) {
-    return buildFallbackData(query || 'Current Location', units)
+return getSampleWeatherData(query || 'Current Location', units)
   }
 
   const coordinates = locationOverride?.lat != null && locationOverride?.lon != null
@@ -436,5 +433,5 @@ export const getWeatherDashboardData = async (query, units = 'metric', locationO
     }
   }
 
-  return buildFallbackData(query, units)
+  return getSampleWeatherData(query, units)
 }
