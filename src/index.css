@@ -37,10 +37,42 @@ input {
 }
 
 .leaflet-container {
-  height: 100%;
+  height: 100% !important;
+  width: 100% !important;
+  background: #f0f0f0;
+  z-index: 1;
+  overflow: auto !important;
+  position: relative;
+}
+
+.leaflet-container * {
+  box-sizing: border-box;
+}
+
+.leaflet-container.dark-mode {
+  background: #1e293b;
+}
+
+.leaflet-pane {
+  position: absolute;
   width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
+  height: 100%;
+  overflow: visible !important;
+}
+
+.leaflet-tile-pane,
+.leaflet-shadow-pane,
+.leaflet-overlay-pane,
+.leaflet-marker-pane,
+.leaflet-tooltip-pane,
+.leaflet-popup-pane {
+  position: absolute;
+  z-index: auto !important;
+  overflow: visible !important;
+}
+
+.leaflet-control {
+  z-index: 999 !important;
 }
 
 #root {
@@ -48,9 +80,26 @@ input {
   overflow-x: hidden;
 }
 
-/* Prevent horizontal scroll on all containers */
-main, section, article, div {
+/* Prevent horizontal scroll on containers - but allow leaflet */
+body > div,
+body > div > div {
   overflow-x: hidden;
+}
+
+/* Map container styles */
+.map-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.map-wrapper .leaflet-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
 }
 
 /* Hide scrollbar while keeping scrollability */
