@@ -50,6 +50,14 @@ const getSampleWeatherData = (query, units) => {
       icon: '01d',
       iconUrl: getWeatherIcon('01d'),
       timestamp: Date.now(),
+      timezoneOffset: 0,
+      city: query || 'New York',
+      state: 'Sample data',
+      country: 'Global',
+      units,
+      unitLabel: getUnitLabel(units),
+      speedUnit: getSpeedUnit(units),
+      distanceUnit: getDistanceUnit(units),
     },
     hourly: Array.from({ length: 8 }, (_, index) => ({
       time: `${index + 1}:00`,
@@ -90,6 +98,7 @@ const getSampleWeatherData = (query, units) => {
     unitLabel: getUnitLabel(units),
     speedUnit: getSpeedUnit(units),
     distanceUnit: getDistanceUnit(units),
+    timezoneOffset: 0,
   }
 }
 
@@ -346,6 +355,7 @@ return getSampleWeatherData(query || 'Current Location', units)
         unitLabel: current.unitLabel,
         speedUnit: current.speedUnit,
         distanceUnit: current.distanceUnit,
+        timezoneOffset: current.timezoneOffset,
       }
     } catch (error) {
       console.error('Weather API Error:', error)
@@ -427,6 +437,7 @@ return getSampleWeatherData(query || 'Current Location', units)
         unitLabel: current.unitLabel,
         speedUnit: current.speedUnit,
         distanceUnit: current.distanceUnit,
+        timezoneOffset: current.timezoneOffset,
       }
     } catch (error) {
       console.error('Weather API Error:', error)

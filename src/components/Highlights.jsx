@@ -16,7 +16,7 @@ const Highlights = ({ data, units, theme }) => {
   const isDark = theme === 'dark'
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+    <div className="grid gap-2 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
       {cards.map((item, index) => {
         const Icon = item.icon
         return (
@@ -25,13 +25,13 @@ const Highlights = ({ data, units, theme }) => {
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.05 }}
-            className={`rounded-3xl border p-4 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}
+            className={`rounded-2xl border p-3 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-3xl sm:p-4 ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}
           >
-            <div className="mb-5 flex items-center justify-between">
-              <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.label}</p>
-              <Icon size={18} className="text-orange-300" />
+            <div className="mb-3 flex items-center justify-between sm:mb-5">
+              <p className={`text-xs sm:text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.label}</p>
+              <Icon size={16} className="text-orange-300 sm:size-4.5" />
             </div>
-            <p className={`text-2xl font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>{item.value(data, units)}</p>
+            <p className={`text-lg font-semibold sm:text-2xl ${isDark ? 'text-white' : 'text-slate-800'}`}>{item.value(data, units)}</p>
           </motion.div>
         )
       })}

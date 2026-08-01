@@ -18,14 +18,14 @@ const Charts = ({ data, theme }) => {
   }
 
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className={`rounded-[28px] border p-4 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
-        <h3 className={`mb-4 text-lg font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Temperature & humidity</h3>
-        <div className="h-56">
+    <div className="grid gap-3 sm:gap-4 lg:grid-cols-2">
+      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} className={`rounded-[28px] border p-3 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:p-4 ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
+        <h3 className={`mb-3 text-base font-semibold sm:mb-4 sm:text-lg ${isDark ? 'text-white' : 'text-slate-800'}`}>Temperature & humidity</h3>
+        <div className="h-40 sm:h-56">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>
-              <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 12 }} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 12 }} />
+              <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 10 }} />
+              <YAxis tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 10 }} />
               <Tooltip contentStyle={tooltipStyle} />
               <Area type="monotone" dataKey="temp" stroke="#fb923c" fill="#fb923c" fillOpacity={0.25} />
               <Area type="monotone" dataKey="humidity" stroke="#38bdf8" fill="#38bdf8" fillOpacity={0.2} />
@@ -34,13 +34,13 @@ const Charts = ({ data, theme }) => {
         </div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className={`rounded-[28px] border p-4 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
-        <h3 className={`mb-4 text-lg font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Wind & rain probability</h3>
-        <div className="h-56">
+      <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className={`rounded-[28px] border p-3 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:p-4 ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
+        <h3 className={`mb-3 text-base font-semibold sm:mb-4 sm:text-lg ${isDark ? 'text-white' : 'text-slate-800'}`}>Wind & rain probability</h3>
+        <div className="h-40 sm:h-56">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chartData}>
-              <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 12 }} />
-              <YAxis tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 12 }} />
+              <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 10 }} />
+              <YAxis tickLine={false} axisLine={false} tick={{ fill: tickColor, fontSize: 10 }} />
               <Tooltip contentStyle={tooltipStyle} />
               <Line type="monotone" dataKey="wind" stroke="#f59e0b" strokeWidth={2} dot={false} />
               <Line type="monotone" dataKey="rain" stroke="#818cf8" strokeWidth={2} dot={false} />
