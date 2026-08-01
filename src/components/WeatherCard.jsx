@@ -53,7 +53,7 @@ const WeatherCard = ({ data, units, onToggleFavorite, isFavorite, theme }) => {
           <div className="flex items-center gap-2"><Gauge size={16} className="text-orange-300" /> {data.current.pressure} hPa</div>
           <div className="flex items-center gap-2"><Sunrise size={16} className="text-orange-300" /> {data.sunInfo?.sunrise}</div>
           <div className="flex items-center gap-2"><Sunset size={16} className="text-orange-300" /> {data.sunInfo?.sunset}</div>
-          <div className={isDark ? 'text-slate-400' : 'text-slate-500'}>Updated {formatCityTime(new Date(data.current.timestamp), data.timezoneOffset)}</div>
+          <div className={isDark ? 'text-slate-400' : 'text-slate-500'}>Updated {formatCityTime(new Date(data.current.timestamp), data.current.timezoneOffset)}</div>
         </div>
       </div>
     </motion.div>
