@@ -39,8 +39,8 @@ function App() {
   const isDark = theme === 'dark'
 
   return (
-    <div className={`min-h-screen bg-linear-to-br ${isDark ? backgroundClass : 'from-amber-100 via-sky-100 to-indigo-100'} px-4 py-4 ${isDark ? 'text-slate-100' : 'text-slate-800'} transition-colors duration-500 sm:px-6 lg:px-8`}>
-      <div className="mx-auto flex max-w-7xl flex-col gap-4">
+    <div className={`min-h-screen w-full overflow-x-hidden bg-linear-to-br ${isDark ? backgroundClass : 'from-amber-100 via-sky-100 to-indigo-100'} px-3 py-3 ${isDark ? 'text-slate-100' : 'text-slate-800'} transition-colors duration-500 sm:px-4 md:px-6 lg:px-8`}>
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 sm:gap-4">
         <Navbar currentDate={currentDate} currentTime={currentTime} theme={theme} onToggleTheme={toggleTheme} />
         <SearchBar
           query={query}
@@ -64,30 +64,30 @@ function App() {
         {loading ? (
           <Loader theme={theme} />
         ) : data ? (
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-            <div className="grid gap-4 xl:grid-cols-[1.5fr_0.8fr]">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3 sm:space-y-4">
+            <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.5fr_0.8fr]">
               <WeatherCard data={data} units={units} onToggleFavorite={toggleFavorite} isFavorite={favorites.includes(data.city)} theme={theme} />
-              <div className="flex flex-col gap-4">
-                <div className={`rounded-[28px] border p-5 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-300/60 bg-white/70 text-slate-800'}`}>
-                  <div className="mb-4 flex items-center justify-between">
-                    <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Units</h3>
-                    <div className="flex gap-2">
-                      <button type="button" onClick={() => setUnits('metric')} className={`rounded-full px-3 py-1.5 text-sm ${units === 'metric' ? 'bg-orange-500 text-white' : isDark ? 'bg-white/10 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <div className={`rounded-3xl border p-3 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-[28px] sm:p-5 ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-300/60 bg-white/70 text-slate-800'}`}>
+                  <div className="mb-3 flex flex-col items-start justify-between gap-2 sm:mb-4 sm:flex-row sm:items-center">
+                    <h3 className={`text-base font-semibold sm:text-lg ${isDark ? 'text-white' : 'text-slate-800'}`}>Units</h3>
+                    <div className="flex gap-1.5 sm:gap-2">
+                      <button type="button" onClick={() => setUnits('metric')} className={`rounded-full px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm ${units === 'metric' ? 'bg-orange-500 text-white' : isDark ? 'bg-white/10 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
                         °C
                       </button>
-                      <button type="button" onClick={() => setUnits('imperial')} className={`rounded-full px-3 py-1.5 text-sm ${units === 'imperial' ? 'bg-orange-500 text-white' : isDark ? 'bg-white/10 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
+                      <button type="button" onClick={() => setUnits('imperial')} className={`rounded-full px-2.5 py-1 text-xs sm:px-3 sm:py-1.5 sm:text-sm ${units === 'imperial' ? 'bg-orange-500 text-white' : isDark ? 'bg-white/10 text-slate-300' : 'bg-slate-100 text-slate-700'}`}>
                         °F
                       </button>
                     </div>
                   </div>
-                  <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{data.summary}</p>
+                  <p className={`text-xs sm:text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{data.summary}</p>
                 </div>
                 <AirQuality data={data} theme={theme} />
               </div>
             </div>
 
             <Highlights data={data} units={units} theme={theme} />
-            <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+            <div className="grid gap-3 sm:gap-4 lg:grid-cols-[1.1fr_0.9fr]">
               <HourlyForecast data={data} theme={theme} />
               <Forecast data={data} theme={theme} />
             </div>
@@ -96,10 +96,10 @@ function App() {
             <Footer theme={theme} />
           </motion.div>
         ) : (
-          <div className={`rounded-[28px] border p-8 text-center ${isDark ? 'border-white/10 bg-slate-950/60 text-slate-300' : 'border-slate-300/60 bg-white/70 text-slate-700'}`}>
-            <LoaderCircle className="mx-auto mb-3" />
-            <p className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>No weather data available yet</p>
-            <p className={`mt-2 text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Try searching for a specific city or country name such as London or Ghana.</p>
+          <div className={`rounded-3xl border p-4 text-center sm:rounded-[28px] sm:p-8 ${isDark ? 'border-white/10 bg-slate-950/60 text-slate-300' : 'border-slate-300/60 bg-white/70 text-slate-700'}`}>
+            <LoaderCircle className="mx-auto mb-2 sm:mb-3" size={32} />
+            <p className={`text-base font-semibold sm:text-lg ${isDark ? 'text-white' : 'text-slate-800'}`}>No weather data available yet</p>
+            <p className={`mt-1 text-xs sm:mt-2 sm:text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>Try searching for a specific city or country name such as London or Ghana.</p>
           </div>
         )}
       </div>

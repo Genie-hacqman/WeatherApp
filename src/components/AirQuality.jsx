@@ -14,16 +14,16 @@ const AirQuality = ({ data, theme }) => {
   ]
 
   return (
-    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className={`rounded-[28px] border p-5 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Air quality</h3>
-        <span className={`rounded-full px-3 py-1 text-sm ${isDark ? 'bg-orange-500/20 text-orange-200' : 'bg-orange-100 text-orange-700'}`}>{getAqiLabel(data?.airQuality?.aqi || 1)}</span>
+    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className={`rounded-[28px] border p-4 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:p-5 ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
+      <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
+        <h3 className={`text-base font-semibold sm:text-lg ${isDark ? 'text-white' : 'text-slate-800'}`}>Air quality</h3>
+        <span className={`rounded-full px-2 py-1 text-xs sm:px-3 sm:py-1 sm:text-sm ${isDark ? 'bg-orange-500/20 text-orange-200' : 'bg-orange-100 text-orange-700'}`}>{getAqiLabel(data?.airQuality?.aqi || 1)}</span>
       </div>
-      <div className="grid gap-3 md:grid-cols-2">
+      <div className="grid gap-2 sm:gap-3 md:grid-cols-2">
         {metrics.map((metric) => (
-          <div key={metric.label} className={`rounded-[20px] border p-3 ${isDark ? 'border-white/10 bg-white/10' : 'border-slate-300/60 bg-white/80'}`}>
-            <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{metric.label}</p>
-            <p className={`mt-2 text-lg font-semibold ${metric.color}`}>{metric.value}</p>
+          <div key={metric.label} className={`rounded-[20px] border p-2 sm:p-3 ${isDark ? 'border-white/10 bg-white/10' : 'border-slate-300/60 bg-white/80'}`}>
+            <p className={`text-xs sm:text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{metric.label}</p>
+            <p className={`mt-1 text-base font-semibold sm:mt-2 sm:text-lg ${metric.color}`}>{metric.value}</p>
           </div>
         ))}
       </div>

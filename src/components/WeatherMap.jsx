@@ -14,8 +14,10 @@ const MapController = ({ center, zoom }) => {
   const map = useMap()
 
   useEffect(() => {
-    map.flyTo(center, zoom, { duration: 1.2 })
-  }, [center, map, zoom])
+    if (map && center && zoom) {
+      map.flyTo(center, zoom, { duration: 1, animate: true })
+    }
+  }, [center[0], center[1], zoom, map])
 
   return null
 }
@@ -37,14 +39,27 @@ const WeatherMap = ({ data, theme }) => {
   const zoom = getZoomForLocation(position[0], position[1])
 
   return (
-    <div className={`overflow-hidden rounded-[28px] border p-3 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
-      <div className="mb-3 flex items-center justify-between px-2">
-        <h3 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-slate-800'}`}>Live conditions map</h3>
-        <p className={`text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{data?.city}</p>
+    <div className={`overflow-hidden rounded-2xl border p-2 shadow-[0_16px_48px_rgba(0,0,0,0.24)] backdrop-blur-xl sm:rounded-[28px] sm:p-3 ${isDark ? 'border-white/10 bg-slate-950/60' : 'border-slate-200/80 bg-white/85 shadow-[0_16px_48px_rgba(15,23,42,0.12)]'}`}>
+      <div className="mb-2 flex flex-col items-start justify-between gap-1 px-1 sm:mb-3 sm:flex-row sm:items-center sm:px-2">
+        <h3 className={`text-base font-semibold sm:text-lg ${isDark ? 'text-white' : 'text-slate-800'}`}>Live conditions map</h3>
+        <p className={`text-xs sm:text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{data?.city}</p>
       </div>
-      <div className="h-80 w-full overflow-hidden rounded-3xl">
-        <MapContainer key={`${position[0]}-${position[1]}`} center={position} zoom={zoom} className="h-full w-full">
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution="&copy; OpenStreetMap contributors" />
+      <div className="h-56 w-full overflow-hidden rounded-xl sm:h-80 sm:rounded-2xl">
+        <MapContainer 
+          center={position} 
+          zoom={zoom} 
+          className="h-full w-full"
+          scrollWheelZoom={true}
+          dragging={true}
+          touchZoom={true}
+          doubleClickZoom={true}
+          zoomControl={true}
+        >
+          <TileLayer 
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" 
+            attribution="&copy; OpenStreetMap contributors"
+            className="h-full w-full"
+          />
           <MapController center={position} zoom={zoom} />
           <Marker position={position} icon={icon}>
             <Popup>{data?.current?.description}</Popup>
