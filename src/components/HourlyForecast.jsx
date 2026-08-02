@@ -25,7 +25,7 @@ const HourlyForecast = ({ data, theme }) => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.04 }}
-            className={`min-w-[72px] shrink-0 rounded-[18px] border p-2 text-center sm:min-w-[96px] sm:p-3 ${isDark ? 'border-white/10 bg-white/10' : 'border-slate-300/60 bg-white/80'}`}
+            className={`min-w-18 shrink-0 rounded-[18px] border p-2 text-center sm:min-w-24 sm:p-3 ${isDark ? 'border-white/10 bg-white/10' : 'border-slate-300/60 bg-white/80'}`}
           >
             <p className={`text-[11px] leading-tight sm:text-sm ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>{item.time}</p>
             <div className="my-1 text-lg sm:my-2 sm:text-2xl">{getWeatherIcon(item.icon)}</div>
