@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -26,7 +26,7 @@ const getZoomForLocation = (lat, lon) => {
 
 const WeatherMap = ({ data, theme }) => {
   const isDark = theme === 'dark'
-  const mapRef = useRef(null)
+  const [map, setMap] = useState(null)
 
   const position = useMemo(
     () => [data?.coordinates?.lat ?? 40.7128, data?.coordinates?.lon ?? -74.006],
@@ -36,10 +36,10 @@ const WeatherMap = ({ data, theme }) => {
   const zoom = useMemo(() => getZoomForLocation(position[0], position[1]), [position])
 
   useEffect(() => {
-    if (mapRef.current && position[0] && position[1]) {
-      mapRef.current.setView(position, zoom, { animate: true })
+    if (map && position[0] && position[1]) {
+      map.setView(position, zoom, { animate: true })
     }
-  }, [position, zoom])
+  }, [map, position, zoom])
 
   if (!data || !data.coordinates) {
     return (
@@ -62,9 +62,9 @@ const WeatherMap = ({ data, theme }) => {
       </div>
       <div className="map-wrapper rounded-xl sm:rounded-2xl overflow-hidden" style={{ height: '224px', width: '100%' }} data-testid="map-container">
         <MapContainer 
-          ref={mapRef}
           center={position} 
           zoom={zoom}
+          whenCreated={setMap}
           style={{ height: '100%', width: '100%', display: 'block' }}
           zoomControl={true}
           scrollWheelZoom={true}

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { getWeatherDashboardData } from '../services/weatherApi'
 import { formatCityDate, formatCityTime } from '../utils/formatters'
 
@@ -33,13 +33,17 @@ export const useWeatherData = () => {
   const [recentSearches, setRecentSearches] = useState(() => readStorage(RECENT_KEY, []))
   const [favorites, setFavorites] = useState(() => readStorage(FAVORITES_KEY, ['Tokyo', 'Reykjavik']))
   const [currentDate, setCurrentDate] = useState(new Date())
+  const [locating, setLocating] = useState(false)
+  const currentLocationOverrideRef = useRef(null)
 
-  const refreshWeather = useCallback(async (nextQuery = query, locationOverride = null) => {
+  const refreshWeather = useCallback(async (nextQuery = query, nextLocationOverride = null) => {
     setLoading(true)
     setError('')
 
+    const override = nextLocationOverride ?? (nextQuery === 'Current Location' ? currentLocationOverrideRef.current : null)
+
     try {
-      const result = await getWeatherDashboardData(nextQuery, units, locationOverride)
+      const result = await getWeatherDashboardData(nextQuery, units, override)
 
       if (!result?.current || !result?.coordinates) {
         throw new Error('No weather data available for the requested location.')
@@ -48,6 +52,10 @@ export const useWeatherData = () => {
       setData(result)
       setError('')
       setQuery(nextQuery)
+
+      if (nextQuery === 'Current Location') {
+        currentLocationOverrideRef.current = override
+      }
 
       if (nextQuery && typeof nextQuery === 'string') {
         setRecentSearches((prev) => {
@@ -111,14 +119,23 @@ export const useWeatherData = () => {
       return
     }
 
+    setLocating(true)
+    setError('')
+
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const latitude = position.coords.latitude
         const longitude = position.coords.longitude
 
-        await refreshWeather('Current Location', { lat: latitude, lon: longitude })
+        const override = { lat: latitude, lon: longitude }
+        currentLocationOverrideRef.current = override
+        await refreshWeather('Current Location', override)
+        setLocating(false)
       },
-      () => setError('Location access was denied. Please search for a city manually.'),
+      () => {
+        setError('Location access was denied. Please search for a city manually.')
+        setLocating(false)
+      },
     )
   }, [refreshWeather])
 
@@ -140,6 +157,7 @@ export const useWeatherData = () => {
     query,
     data,
     loading,
+    locating,
     error,
     setQuery,
     searchCity,

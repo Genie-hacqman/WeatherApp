@@ -20,6 +20,7 @@ function App() {
     query,
     data,
     loading,
+    locating,
     error,
     setQuery,
     searchCity,
@@ -51,6 +52,7 @@ function App() {
           onFavorite={toggleFavorite}
           onCurrentLocation={useCurrentLocation}
           loading={loading}
+          locating={locating}
           theme={theme}
         />
 

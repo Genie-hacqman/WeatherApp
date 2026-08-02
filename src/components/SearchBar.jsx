@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Search, MapPin, Star } from 'lucide-react'
 
-const SearchBar = ({ query, onQueryChange, onSearch, favorites, recentSearches, onFavorite, onCurrentLocation, loading, theme }) => {
+const SearchBar = ({ query, onQueryChange, onSearch, favorites, recentSearches, onFavorite, onCurrentLocation, loading, locating, theme }) => {
   const [localQuery, setLocalQuery] = useState(query)
   const isDark = theme === 'dark'
 
@@ -37,6 +37,7 @@ const SearchBar = ({ query, onQueryChange, onSearch, favorites, recentSearches, 
           onClick={onCurrentLocation}
           className={`rounded-full border p-1.5 transition sm:p-2 ${isDark ? 'border-white/10 bg-white/10 text-slate-200 hover:bg-white/20' : 'border-slate-300/60 bg-slate-100/80 text-slate-700 hover:bg-slate-200/90'}`}
           aria-label="Use current location"
+          disabled={loading || locating}
         >
           <MapPin size={14} className="sm:size-4" />
         </button>
@@ -46,7 +47,7 @@ const SearchBar = ({ query, onQueryChange, onSearch, favorites, recentSearches, 
           className="rounded-full bg-orange-500 px-3 py-1.5 text-xs font-semibold text-white transition hover:bg-orange-400 sm:px-4 sm:py-2 sm:text-sm"
           disabled={loading}
         >
-          {loading ? 'Loading…' : 'Search'}
+          {locating ? 'Locating…' : loading ? 'Loading…' : 'Search'}
         </button>
       </div>
       <div className={`hidden flex-wrap gap-1.5 text-xs sm:flex sm:gap-2 sm:text-sm ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
